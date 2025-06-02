@@ -53,7 +53,7 @@ public class ProductRepository implements Repository<Product, Integer> {
         }catch (Exception exception){
             System.out.println("[!] Error during get all products: " + exception.getMessage());
         }
-        return ProductData.products;
+        return null;
     }
 
     @Override
