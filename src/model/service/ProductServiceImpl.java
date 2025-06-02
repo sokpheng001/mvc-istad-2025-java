@@ -1,8 +1,7 @@
 package model.service;
 
 import mapper.ProductMapper;
-import model.ProductData;
-import model.dao.ProductRepository;
+import model.repository.ProductRepository;
 import model.dto.ProductCreateDto;
 import model.dto.ProductResponseDto;
 import model.dto.UpdateProductDto;
@@ -39,9 +38,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Integer deleteProductByUuid(String uuid) {
         try{
-            Product product = ProductData.products.stream()
-                    .filter(p->p.getUuid().equals(uuid))
-                    .findFirst().get();
+            Product product = productRepository.findByProductUuid(uuid);
             return productRepository.delete(product.getId());
         }catch (NoSuchElementException exception){
             System.out.println("Error during deleting Product by Uuid:" + exception.getMessage());

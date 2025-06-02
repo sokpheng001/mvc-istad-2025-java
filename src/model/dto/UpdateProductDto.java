@@ -1,6 +1,9 @@
 package model.dto;
 
+import java.sql.Date;
+
 public record UpdateProductDto(
-        String pName
+        String pName,
+        Date expired_date
 ) {
 }

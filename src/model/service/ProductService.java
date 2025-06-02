@@ -1,6 +1,5 @@
 package model.service;
 
-import model.dao.ProductRepository;
 import model.dto.ProductCreateDto;
 import model.dto.ProductResponseDto;
 import model.dto.UpdateProductDto;
