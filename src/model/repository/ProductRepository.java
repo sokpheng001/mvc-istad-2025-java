@@ -119,4 +119,28 @@ public class ProductRepository implements Repository<Product, Integer> {
         }
         throw new NoSuchElementException("Cannot find Product");
     }
+    public Product findByProductId(Integer id){
+        System.out.println(id);
+        String sql = """
+                SELECT * FROM products
+                WHERE id = ?
+                """;
+        try(Connection con = DatabaseConnectionConfig.getConnection()){
+            PreparedStatement pre = con.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet result = pre.executeQuery();
+            Product product = new Product();
+            while (result.next()){
+                product.setId(result.getInt("id"));
+                product.setUuid(result.getString("uuid"));
+                product.setPName(result.getString("p_name"));
+                product.setExpiredDate(result.getDate("expired_date"));
+            }
+
+            return product;
+        }catch (Exception exception){
+            System.out.println("[!] Error during get product by id: " + exception.getMessage());
+        }
+        return null;
+    }
 }
